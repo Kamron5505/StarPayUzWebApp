@@ -1,19 +1,623 @@
+/* StarPayUz - Modern Dark Theme */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0F1419;
+    --bg-secondary: #1A1F2E;
+    --bg-card: #1E2433;
+    --bg-input: #252B3A;
+    --border-color: #2D3748;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8B92A8;
+    --text-muted: #5A6478;
+    --blue-primary: #1E90FF;
+    --blue-hover: #1C7FE8;
+    --blue-light: #3FA4FF;
+    --accent-gradient: linear-gradient(135deg, #1E90FF 0%, #0066CC 100%);
+}
+
 body {
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--bg-secondary);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-circle {
+    width: 48px;
+    height: 48px;
+    background: var(--blue-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
 }
 
 .logo-text {
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
-.logo-text .gold {
-  color: #f5c518;
-  text-shadow: 0 0 12px rgba(245, 197, 24, 0.45);
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-.card-glow {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.4);
+.balance-badge {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.add-button {
+    width: 48px;
+    height: 48px;
+    background: var(--blue-primary);
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 28px;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.add-button:active {
+    transform: scale(0.95);
+}
+
+/* Tabs */
+.tabs-container {
+    padding: 16px 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 12px;
+}
+
+.tab {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 28px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+}
+
+.tab.active {
+    background: var(--accent-gradient);
+    color: white;
+    box-shadow: 0 4px 16px rgba(30, 144, 255, 0.4);
+}
+
+/* Content */
+.content {
+    padding: 0 20px;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--blue-light);
+    margin-bottom: 20px;
+}
+
+.section-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+/* Input Group */
+.input-group {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.input-icon {
+    padding-left: 12px;
+    font-size: 22px;
+    color: var(--blue-primary);
+}
+
+.input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 8px;
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+}
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.input-button {
+    background: var(--blue-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.input-button:active {
+    transform: scale(0.96);
+}
+
+/* Amount Box */
+.amount-box {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.amount-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.amount-display-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.amount-icon {
+    font-size: 28px;
+}
+
+.amount-label {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.amount-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue-primary);
+}
+
+/* Buttons Row */
+.buttons-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.amount-btn {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px 8px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.amount-btn.selected {
+    background: var(--blue-primary);
+    border-color: var(--blue-primary);
+    box-shadow: 0 4px 16px rgba(30, 144, 255, 0.4);
+}
+
+/* Primary Button */
+.btn-primary {
+    width: 100%;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+    transition: all 0.2s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Gift Cards Grid */
+.gift-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.gift-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.gift-card:active {
+    transform: scale(0.96);
+}
+
+.gift-card-emoji {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.gift-card-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.gift-card-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue-primary);
+}
+
+/* Leaderboard */
+.leaderboard-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.leaderboard-tab {
+    flex: 1;
+    padding: 12px;
+    background: var(--bg-card);
+    border: none;
+    border-radius: 14px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.leaderboard-tab.active {
+    background: var(--blue-primary);
+    color: white;
+}
+
+.leaderboard-info {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.leaderboard-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px 20px;
+    font-size: 15px;
+}
+
+/* Profile Section */
+.profile-header {
+    text-align: center;
+    padding: 24px 20px;
+    margin-bottom: 24px;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.profile-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.profile-username {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.profile-section {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 12px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.profile-item:active {
+    background: var(--bg-secondary);
+}
+
+.profile-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-item-icon {
+    font-size: 22px;
+    color: var(--blue-primary);
+}
+
+.profile-item-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.profile-item-right {
+    color: var(--text-secondary);
+    font-size: 18px;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    width: 51px;
+    height: 31px;
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-switch.active {
+    background: var(--blue-primary);
+}
+
+.toggle-switch-circle {
+    width: 27px;
+    height: 27px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: all 0.3s;
+}
+
+.toggle-switch.active .toggle-switch-circle {
+    left: 22px;
+}
+
+/* Referral Card */
+.referral-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.referral-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.referral-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.referral-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.referral-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-radius: 14px;
+}
+
+.referral-item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.referral-item-icon {
+    font-size: 20px;
+}
+
+.referral-item-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.referral-item-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blue-primary);
+}
+
+.referral-button {
+    width: 100%;
+    background: var(--blue-primary);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.referral-button:active {
+    transform: scale(0.98);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 12px 20px 24px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.nav-item.active {
+    background: rgba(30, 144, 255, 0.1);
+}
+
+.nav-icon {
+    font-size: 26px;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.nav-item.active .nav-icon {
+    color: var(--blue-primary);
+}
+
+.nav-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.nav-item.active .nav-label {
+    color: var(--blue-primary);
+}
+
+/* Footer Text */
+.footer-text {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 24px 20px 12px;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.mb-24 {
+    margin-bottom: 24px;
+}
+
+.text-center {
+    text-align: center;
 }
