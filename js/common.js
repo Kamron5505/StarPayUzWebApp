@@ -11,8 +11,13 @@ tg.setBackgroundColor('#030712');
 
 let userBalance = 0;
 
-// API base — same origin (served from the same server as the webapp)
-const API_BASE = '';
+// API base — can be overridden per-page via window.API_BASE
+// e.g. in stars.html: <script>window.API_BASE = 'https://your-railway-url.railway.app';</script>
+function getApiBase() {
+    return (typeof window.API_BASE !== 'undefined' && window.API_BASE)
+        ? window.API_BASE.replace(/\/$/, '')
+        : '';
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     fillUsernameFromTelegram();
@@ -98,7 +103,7 @@ async function submitOrder(payload, btnId) {
     body.telegram_id = tg.initDataUnsafe?.user?.id || null;
 
     try {
-        const response = await fetch(API_BASE + endpoint, {
+        const response = await fetch(getApiBase() + endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
