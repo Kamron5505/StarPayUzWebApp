@@ -126,7 +126,7 @@ async function submitOrder(payload, btnId) {
         }
     } catch (e) {
         setBuyButtonLoading(btnId, false);
-        tg.showAlert('❌ Tarmoq xatoligi. Internet aloqangizni tekshiring.');
+        tg.showAlert('❌ Tarmoq xatoligi: ' + (e.message || e.toString()) + ' | URL: ' + getApiBase() + endpoint);
     }
 }
 
