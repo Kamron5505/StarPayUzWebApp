@@ -453,35 +453,7 @@
         text-align: center;
     }
 
-    .quick-amounts-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        margin-bottom: 16px;
-    }
 
-    .quick-amount {
-        padding: 12px 6px;
-        background: #1E293B;
-        border: 2px solid transparent;
-        border-radius: 12px;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: .3s;
-        text-align: center;
-    }
-
-    .quick-amount:active {
-        transform: scale(0.95);
-    }
-
-    .quick-amount.selected {
-        background: #3B82F6;
-        border-color: #3B82F6;
-        box-shadow: 0 0 15px rgba(59, 130, 246, .4);
-    }
 
     .payment-info {
         display: none;
@@ -697,20 +669,11 @@
                     type="number" 
                     class="topup-input" 
                     id="topupAmount" 
-                    placeholder="Summa kiriting"
-                    min="10000"
+                    placeholder="1000"
+                    min="1000"
                     max="10000000"
                 >
-                <div class="topup-hint">Min: 10,000 | Max: 10,000,000 so'm</div>
-            </div>
-
-            <div class="quick-amounts-grid">
-                <button class="quick-amount" onclick="selectTopupAmount(10000, this)">10k</button>
-                <button class="quick-amount" onclick="selectTopupAmount(25000, this)">25k</button>
-                <button class="quick-amount" onclick="selectTopupAmount(50000, this)">50k</button>
-                <button class="quick-amount" onclick="selectTopupAmount(100000, this)">100k</button>
-                <button class="quick-amount" onclick="selectTopupAmount(250000, this)">250k</button>
-                <button class="quick-amount" onclick="selectTopupAmount(500000, this)">500k</button>
+                <div class="topup-hint">Min: 1,000 so'm | Max: 10,000,000 so'm</div>
             </div>
 
             <div class="payment-info" id="paymentInfo">
@@ -719,7 +682,7 @@
                 </div>
 
                 <div class="payment-row">
-                    <div class="payment-label">🆔 ID:</div>
+                    <div class="payment-label">🆔 ID</div>
                     <div class="payment-value">
                         <span id="orderId">-</span>
                         <button class="copy-btn" onclick="copyText('orderId')">Copy</button>
@@ -727,16 +690,16 @@
                 </div>
 
                 <div class="payment-row">
-                    <div class="payment-label">💰 Summa:</div>
-                    <div class="payment-value" id="paymentAmount">0 so'm</div>
-                </div>
-
-                <div class="payment-row">
-                    <div class="payment-label">💳 Karta:</div>
+                    <div class="payment-label">� Karta</div>
                     <div class="payment-value">
                         <span id="cardNumber">****</span>
                         <button class="copy-btn" onclick="copyCardNumber()">Copy</button>
                     </div>
+                </div>
+
+                <div class="payment-row">
+                    <div class="payment-label">� Summa</div>
+                    <div class="payment-value" id="paymentAmount">0</div>
                 </div>
 
                 <div class="timer-block">
@@ -747,14 +710,7 @@
                 <div class="warning-box">
                     <div class="warning-icon">⚠️</div>
                     <div class="warning-text">
-                        <strong>MUHIM!</strong> Aynan ko'rsatilgan summani to'lang! 1 so'm farq bo'lsa ham avtomatik qabul qilinmaydi.
-                    </div>
-                </div>
-
-                <div class="warning-box">
-                    <div class="warning-icon">⏱️</div>
-                    <div class="warning-text">
-                        5 daqiqa ichida to'lov qilmasangiz avtomatik bekor qilinadi!
+                        AYNAN ko'rsatilgan summani to'lang! 1 so'm farq = qabul qilinmaydi.
                     </div>
                 </div>
 
@@ -886,7 +842,6 @@
             document.getElementById('createPaymentBtn').style.display = 'block';
             selectedTopupAmount = 0;
             document.getElementById('topupAmount').value = '';
-            document.querySelectorAll('.quick-amount').forEach(btn => btn.classList.remove('selected'));
             
             if (topupTimer) {
                 clearInterval(topupTimer);
@@ -894,54 +849,33 @@
             }
         }
 
-        function selectTopupAmount(amount, btn) {
-            selectedTopupAmount = amount;
-            document.getElementById('topupAmount').value = amount;
-            document.querySelectorAll('.quick-amount').forEach(b => b.classList.remove('selected'));
-            if (btn) btn.classList.add('selected');
-        }
-
-        document.getElementById('topupAmount').addEventListener('input', function() {
-            selectedTopupAmount = parseInt(this.value) || 0;
-            document.querySelectorAll('.quick-amount').forEach(b => b.classList.remove('selected'));
-        });
-
         async function createPayment() {
-            const amount = selectedTopupAmount || parseInt(document.getElementById('topupAmount').value);
+            const amount = parseInt(document.getElementById('topupAmount').value);
             
-            if (!amount || amount < 10000) {
-                tg.showAlert('Minimal summa: 10,000 so\'m');
+            if (!amount || amount < 1000) {
+                tg.showAlert('Minimal: 1,000 so\'m');
                 return;
             }
             
             if (amount > 10000000) {
-                tg.showAlert('Maksimal summa: 10,000,000 so\'m');
+                tg.showAlert('Maksimal: 10,000,000 so\'m');
                 return;
             }
 
-            // Generate unique order ID
             currentOrderId = 'topup_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
             
-            // Show payment info
             document.getElementById('createPaymentBtn').style.display = 'none';
             document.getElementById('paymentInfo').classList.add('active');
             
-            // Set values
             document.getElementById('orderId').textContent = currentOrderId;
             document.getElementById('paymentAmount').textContent = amount.toLocaleString('uz-UZ') + ' so\'m';
             document.getElementById('cardNumber').textContent = formatCardNumber(CARD_NUMBER);
             
-            // Set times
             const now = new Date();
-            topupEndTime = new Date(now.getTime() + 5 * 60 * 1000); // 5 minutes
+            topupEndTime = new Date(now.getTime() + 5 * 60 * 1000);
             
-            document.getElementById('startTime').textContent = formatTime(now);
-            document.getElementById('endTime').textContent = formatTime(topupEndTime);
-            
-            // Start timer
             startTimer();
             
-            // Save to database (optional)
             try {
                 await fetch(`${window.API_BASE}/api/order/topup`, {
                     method: 'POST',
